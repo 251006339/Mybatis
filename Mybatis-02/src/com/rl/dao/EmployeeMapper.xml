@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rl.dao.EmployeeMapper">
+    <!--
+    namespace:名称空间;指定为接口的全类名
+    id：唯一标识
+    resultType：返回值类型
+    #{id}：从传递过来的参数中取出id值
+
+    public Employee getEmpById(Integer id);
+
+    注册接口
+				class：引用（注册）接口，
+					1、有sql映射文件，映射文件名必须和接口同名，并且放在与接口同一目录下；
+					2、没有sql映射文件，所有的sql都是利用注解写在接口上;
+					推荐：
+						比较重要的，复杂的Dao接口我们来写sql映射文件
+						不重要，简单的Dao接口为了开发快速可以使用注解；
+
+     -->
+    <select id="getEmpById" resultType="com.rl.bean.Employee">
+		select id,last_name as lastName,email,gender from tbl_employee where id = #{id}
+	</select>
+</mapper>

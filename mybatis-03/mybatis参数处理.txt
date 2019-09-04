@@ -1,0 +1,23 @@
+单个参数:不做任何处理
+ #{iddas}----->?取出参数值;
+
+ 多个参数:mybatis 会做特殊处理
+ 多个参数会被封装成一个map;
+ 异常:org.apache.ibatis.binding.BindingException:
+    	Parameter 'id' not found.
+    	Available parameters are [1, 0, param1, param2]
+ 1.
+    key:param1...paramN,或者参数的索引也可以 put(param1,value), put(param2,value)
+    value:传入的参数值
+    #{} 就是从map中获取指定的key值;
+2.命名参数:加入到map集合中
+@Param("id") @Param("name") --多个参数  封装成map (id,2) (name,4)
+
+3 pojo:
+如果多个参数正好是我们业务逻辑的数据模型.我们就可以直接传入pojo;
+#{属性名}:
+4Map:
+如果多个参数不是业务模型中的数据,没有对于的pojo,不经常使用,为了方便,我们也可以传入map
+#{key} 取出map对应的值
+5:to: 自定义对象,-->map
+

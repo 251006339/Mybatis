@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--资源读取 -->
+    <properties resource="dbconfig.properties"></properties>
+<!--起别名-->
+    <typeAliases>
+        <!-- 1、typeAlias:为某个java类型起别名
+                type:指定要起别名的类型全类名;默认别名就是类名小写；employee
+                alias:指定新的别名
+         -->
+        <!-- <typeAlias type="com.atguigu.mybatis.bean.Employee" alias="emp"/> -->
+
+        <!-- 2、package:为某个包下的所有类批量起别名
+                name：指定包名（为当前包以及下面所有的后代包的每一个类都起一个默认别名（类名小写），）
+        -->
+        <package name="com.rl.bean"/>
+
+        <!-- 3、批量起别名的情况下，使用@Alias注解为某个类型指定新的别名 -->
+    </typeAliases>
+
+
+   <!--开发环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/test2" />
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 将我们写好的sql映射文件（EmployeeMapper.xml）一定要注册到全局配置文件（mybatis-config.xml）中 -->
+    <mappers>
+        <!--第一种方式-->
+        <!--<mapper resource="EmployeeMapper.xml" />-->
+        <!--第二种方式 读取注解操作-->
+    <!--   <mapper class="com.rl.dao.EmployeeMapperAnnotation"/>-->
+        <!--第三种方法 dao和xml的名字和方法名一值,可以根据代理对象获取查询结果-->
+       <package name="com.rl.dao"/><!--读取dao注解的操作 -->
+    </mappers>
+</configuration>
